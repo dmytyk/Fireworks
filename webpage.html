@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            .row::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+            [class*="col-"] {
+                float: left;
+                padding: 20px;
+            }
+
+            html {
+                font-family: Georgia;
+            }
+
+            .header {
+                background-color: #37474F;
+                color: #ffffff;
+                text-align: center;
+                padding: 1px;
+                letter-spacing: 4px;
+            }
+
+            .menu {
+                padding: 6px;
+                margin-bottom: 7px;
+                text-align: center;
+            }
+
+            .menu table{
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .menu td:hover {
+                background-color: #37474F;
+            }
+
+            .footer {
+                background-color: #37474F;
+                color: white;
+                text-align: center;
+                font-size: 14px;
+                padding: 2px;
+            }
+
+            .footer table{
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* For mobile phones: */
+            [class*="col-"] {
+                width: 100%;
+            }
+
+            @media only screen and (min-width: 600px) {
+                /* For tablets: */
+                .col-s-3 {width: 100%;}
+            }
+            @media only screen and (min-width: 768px) {
+                /* For desktop: */
+                .col-3 {width: 100%;}
+            }
+            /* system group */
+            .sysstyle {
+                padding: 5px 5px;
+                font-size: 18px;
+                font-weight: bold;
+                text-align: center;
+            }
+            .rowstyle {
+                border: solid;
+                border-color: dimgrey;
+                background-color: lightgrey;
+                color: black;
+                padding: 5px 5px;
+                width: 150px;
+                font-size: 18px;
+                cursor: pointer;
+                text-align: center;
+                border-radius: 12px;
+                font-weight: bold;
+            }
+            .selstyle {
+                color: blue;
+                padding: 5px 5px;
+                width: 150px;
+                font-size: 18px;
+                cursor: pointer;
+                text-align: center;
+                font-weight: bold;
+            }
+            .armstyle {
+                border: solid;
+                border-color: dimgrey;
+                background-color: lightgrey;
+                color: darkorange;
+                padding: 5px 5px;
+                width: 150px;
+                font-size: 18px;
+                cursor: pointer;
+                text-align: center;
+                border-radius: 12px;
+                font-weight: bold;
+            }
+            .firestyle {
+                border: solid;
+                border-color: dimgrey;
+                background-color: lightgrey;
+                color: red;
+                padding: 5px 5px;
+                width: 150px;
+                font-size: 18px;
+                cursor: pointer;
+                text-align: center;
+                border-radius: 12px;
+                font-weight: bold;
+            }
+            table {
+                border-spacing: 6px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h2>Fireworks Controller</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-3 col-s-3 menu">
+                <table>
+                    <th class="sysstyle" colspan="2">Select a Row to Fire</th>
+                    <tr>
+                        <td><button type="button" class="rowstyle" id="rw1" name="rw1" onclick="sendcontrolcommand(name)">Row 1</button></td>
+                        <td><button type="button" class="rowstyle" id="rw6" name="rw6" onclick="sendcontrolcommand(name)">Row 6</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="rowstyle" id="rw2" name="rw2" onclick="sendcontrolcommand(name)">Row 2</button></td>
+                        <td><button type="button" class="rowstyle" id="rw7" name="rw7" onclick="sendcontrolcommand(name)">Row 7</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="rowstyle" id="rw3" name="rw3" onclick="sendcontrolcommand(name)">Row 3</button></td>
+                        <td><button type="button" class="rowstyle" id="rw8" name="rw8" onclick="sendcontrolcommand(name)">Row 8</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="rowstyle" id="rw4" name="rw4" onclick="sendcontrolcommand(name)">Row 4</button></td>
+                        <td><button type="button" class="rowstyle" id="rw9" name="rw9" onclick="sendcontrolcommand(name)">Row 9</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="rowstyle" id="rw5" name="rw5" onclick="sendcontrolcommand(name)">Row 5</button></td>
+                        <td><button type="button" class="rowstyle" id="rw10" name="rw10" onclick="sendcontrolcommand(name)">Row 10</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td  colspan="2" class="selstyle" id="rowNumber">Selected Row: 0</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="button" class="armstyle" name="arm" onclick="sendcontrolcommand(name)">A R M</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="button" class="firestyle" name="fire" onclick="sendcontrolcommand(name)">F I R E</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="button" name="rst" onclick="resetController();">R E S E T</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <table>
+                <tr>
+                    <td>WiFi: </td>
+                    <td id="DS_Communication"></td>
+                    <td> - </td>
+                    <td>Battery: </td>
+                    <td id="battery"></td>
+                    <td> - </td>
+                    <td>Status: </td>
+                    <td id="row_status"></td>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+            let server = "ws://" + window.location.hostname + ":8080/";
+            let socket = null;
+            let selectedRow = 0;
+
+            function connectSocket() {
+                document.getElementById("DS_Communication").innerHTML = 'Connecting';
+                document.getElementById("battery").innerHTML = '0 (v)';
+                document.getElementById("row_status").innerHTML = 'Off';
+
+                socket = new WebSocket(server);
+
+                socket.onopen = function() {
+                    // show connected
+                    document.getElementById("DS_Communication").innerHTML = 'On';
+
+                    // reset the arduino, when it's done it will return a reset for the webpage
+                    socket.send("rst");
+                }
+
+                socket.onmessage = function(m) {
+                    let sentData = m.data.split(":");
+
+                    if (sentData[0] == "B") {
+                        document.getElementById("battery").innerHTML = sentData[1];
+                    }
+                    if (sentData[0] == "S") {
+                        if(sentData[1] == 0) {
+                            document.getElementById("row_status").innerHTML = "No Row Selected";
+                        }
+                        if(sentData[1] == 1) {
+                            document.getElementById("row_status").innerHTML = "Armed";
+                        }
+                        if(sentData[1] == 2) {
+                            document.getElementById("row_status").innerHTML = "Not Armed";
+                        }
+                        if(sentData[1] == 3) {
+                            document.getElementById("row_status").innerHTML = "Fire";
+                            switch(Number(selectedRow)) {
+                                case 1:
+                                    document.getElementById("rw1").innerHTML = "Fired";
+                                    break;
+                                case 2:
+                                    document.getElementById("rw2").innerHTML = "Fired";
+                                    break;
+                                case 3:
+                                    document.getElementById("rw3").innerHTML = "Fired";
+                                    break;
+                                case 4:
+                                    document.getElementById("rw4").innerHTML = "Fired";
+                                    break;
+                                case 5:
+                                    document.getElementById("rw5").innerHTML = "Fired";
+                                    break;
+                                case 6:
+                                    document.getElementById("rw6").innerHTML = "Fired";
+                                    break;
+                                case 7:
+                                    document.getElementById("rw7").innerHTML = "Fired";
+                                    break;
+                                case 8:
+                                    document.getElementById("rw8").innerHTML = "Fired";
+                                    break;
+                                case 9:
+                                    document.getElementById("rw9").innerHTML = "Fired";
+                                    break;
+                                case 10:
+                                    document.getElementById("rw10").innerHTML = "Fired";
+                                    break;
+                            }
+                        }
+                    }
+                    if (sentData[0] == "R") {
+                        // set the selected row
+                        selectedRow = sentData[1];
+                        document.getElementById("rowNumber").innerHTML = "Selected Row: " + sentData[1];
+                    }
+                    if (sentData[0] == "C") {
+                        document.getElementById("rowNumber").innerHTML = "Selected Row: 0";
+                        document.getElementById("rw1").innerHTML = "Row 1";
+                        document.getElementById("rw2").innerHTML = "Row 2";
+                        document.getElementById("rw3").innerHTML = "Row 3";
+                        document.getElementById("rw4").innerHTML = "Row 4";
+                        document.getElementById("rw5").innerHTML = "Row 5";
+                        document.getElementById("rw6").innerHTML = "Row 6";
+                        document.getElementById("rw7").innerHTML = "Row 7";
+                        document.getElementById("rw8").innerHTML = "Row 8";
+                        document.getElementById("rw9").innerHTML = "Row 9";
+                        document.getElementById("rw10").innerHTML = "Row 10";
+                        document.getElementById("row_status").innerHTML = "Off";
+                        selectedRow = 0;
+                    }
+                }
+
+                socket.onerror = function() {
+                    socket.close();
+                }
+
+                socket.onclose = function() {
+                    document.getElementById("DS_Communication").innerHTML = 'Disc';
+                    setTimeout(connectSocket, 1000);
+                }
+            }
+
+            connectSocket();
+
+            window.addEventListener("beforeunload", function() {
+                socket.onclose = function() {};
+                socket.close();
+            });
+
+            function sendcontrolcommand(cmd) {
+                try {
+                    socket.send(cmd);
+                } catch (e) {
+                    socket.onerror(e);
+                }
+            }
+
+            // get/show a confirmation
+            function resetController() {
+                if (confirm("Do you really want to reset the controller ?")) {
+                    sendcontrolcommand("rst");
+                }
+            }
+        </script>
+    </body>
+</html>
