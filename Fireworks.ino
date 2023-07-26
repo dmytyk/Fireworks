@@ -215,7 +215,7 @@ void loop() {
     
     WiFiClient client = WebServer.available();   // listen for incoming clients
 
-    if(client)if(client) {
+    if(client) {
         if(TerminalAttached) {
            Serial.print("New client: ");
            Serial.print(client.remoteIP());
@@ -224,7 +224,7 @@ void loop() {
         }
         String header = "";
     
-        while (client.connected()) {            // loop while the client's connected
+        if(client.connected()) {            // loop while the client's connected
             while(client.available())
             {
                 char ch = client.read();
@@ -254,9 +254,8 @@ void loop() {
                 
                     while (webpage_gz_length > done) 
                     {
-                        if (webpage_gz_length - done < packetsize) {
-                    
-                        packetsize = webpage_gz_length - done;
+                        if (webpage_gz_length - done < packetsize) {                    
+                            packetsize = webpage_gz_length - done;
                         }
                   
                         client.write(webpage_gz + done, packetsize * sizeof(char));
